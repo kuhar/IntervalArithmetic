@@ -13,48 +13,48 @@ using namespace std;
 
 namespace ean
 {
-	Interval::Interval(const std::string& value) noexcept
+	Interval::Interval(const std::string& value) 
 		: m_value(IntervalArithmetic::IntRead(value))
 	{}
 
-	Interval::Interval(IntervalArithmetic::interval interval) noexcept
+	Interval::Interval(IntervalArithmetic::interval interval) 
 		: m_value(interval)
 	{}
 
-	long double Interval::getWidth() const noexcept
+	long double Interval::getWidth() const 
 	{
 		return IntervalArithmetic::IntWidth(m_value);
 	}
 
-	Interval& Interval::operator+=(const Interval& rhs) noexcept
+	Interval& Interval::operator+=(const Interval& rhs) 
 	{
 		m_value = IntervalArithmetic::IAdd(m_value, rhs.m_value);
 		return *this;
 	}
 
-	Interval Interval::operator+(const Interval& rhs) const noexcept
+	Interval Interval::operator+(const Interval& rhs) const 
 	{
 		return {IntervalArithmetic::IAdd(m_value, rhs.m_value)};
 	}
 
-	Interval& Interval::operator-=(const Interval& rhs) noexcept
+	Interval& Interval::operator-=(const Interval& rhs) 
 	{
 		m_value = IntervalArithmetic::ISub(m_value, rhs.m_value);
 		return *this;
 	}
 
-	Interval Interval::operator-(const Interval& rhs) const noexcept
+	Interval Interval::operator-(const Interval& rhs) const 
 	{
 		return {IntervalArithmetic::ISub(m_value, rhs.m_value)};
 	}
 
-	Interval& Interval::operator*=(const Interval& rhs) noexcept
+	Interval& Interval::operator*=(const Interval& rhs) 
 	{
 		m_value = IntervalArithmetic::IMul(m_value, rhs.m_value);
 		return *this;
 	}
 
-	Interval Interval::operator*(const Interval& rhs) const noexcept
+	Interval Interval::operator*(const Interval& rhs) const 
 	{
 		return {IntervalArithmetic::IMul(m_value, rhs.m_value)};
 	}
@@ -76,29 +76,29 @@ namespace ean
 			&& (std::fabs(m_value.b - rhs.m_value.b) < LDBL_EPSILON);
 	}
 
-	Interval& Interval::opposite() noexcept
+	Interval& Interval::opposite() 
 	{
 		m_value = IntervalArithmetic::Opposite(m_value);
 		return *this;
 	}
 
-	Interval Interval::getOpposite() const noexcept
+	Interval Interval::getOpposite() const 
 	{
 		return {IntervalArithmetic::Opposite(m_value)};
 	}
 
-	Interval& Interval::invert() noexcept
+	Interval& Interval::invert() 
 	{
 		m_value = IntervalArithmetic::Inverse(m_value);
 		return *this;
 	}
 
-	Interval Interval::getInverse() const noexcept
+	Interval Interval::getInverse() const 
 	{
 		return {IntervalArithmetic::Inverse(m_value)};
 	}
 
-	ErrorCode<Interval> Interval::sin() const noexcept
+	ErrorCode<Interval> Interval::sin() const 
 	{
 		try
 		{
@@ -112,7 +112,7 @@ namespace ean
 		}
 	}
 
-	ErrorCode<Interval> Interval::cos() const noexcept
+	ErrorCode<Interval> Interval::cos() const 
 	{
 		try
 		{
@@ -126,7 +126,7 @@ namespace ean
 		}
 	}
 
-	ErrorCode<Interval> Interval::exp() const noexcept
+	ErrorCode<Interval> Interval::exp() const 
 	{
 		try
 		{
@@ -140,7 +140,7 @@ namespace ean
 		}
 	}
 
-	ErrorCode<Interval> Interval::sqrt() const noexcept
+	ErrorCode<Interval> Interval::sqrt() const 
 	{
 		try
 		{

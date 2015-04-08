@@ -19,52 +19,54 @@ namespace ean
 	public:
 		static const char DivisionByZeroCode = 3;
 
-		Interval() noexcept = default;
-		Interval(long double left, long double right) noexcept
-			: m_value{left, right}
-		{}
-		Interval(const std::string& value) noexcept;
+		Interval() = default;
+		Interval(long double left, long double right) 
+		{
+			m_value = {left, right};
+		}
 
-		long double getLeft() const noexcept { return m_value.a;  }
+		Interval(const std::string& value);
+
+		long double getLeft() const { return m_value.a;  }
 		std::string getLeftAsString() const;
-		long double getRight() const noexcept { return m_value.b; }
+		long double getRight() const { return m_value.b; }
 		std::string getRightAsString() const;
-		long double getWidth() const noexcept;
+		long double getWidth() const;
 
-		Interval& operator+=(const Interval& rhs) noexcept;
-		Interval operator+(const Interval& rhs) const noexcept;
+		Interval& operator+=(const Interval& rhs);
+		Interval operator+(const Interval& rhs) const;
 
-		Interval& operator-=(const Interval& rhs) noexcept;
-		Interval operator-(const Interval& rhs) const noexcept;
+		Interval& operator-=(const Interval& rhs);
+		Interval operator-(const Interval& rhs) const;
 
-		Interval& operator*=(const Interval& rhs) noexcept;
-		Interval operator*(const Interval& rhs) const noexcept;
+		Interval& operator*=(const Interval& rhs);
+		Interval operator*(const Interval& rhs) const;
 
 		Interval& operator/=(const Interval& rhs);
 		Interval operator/(const Interval& rhs) const;
 
 		bool operator==(const Interval& rhs) const;
 
-		Interval& opposite() noexcept;
-		Interval getOpposite() const noexcept;
-		Interval& invert() noexcept;
-		Interval getInverse() const noexcept;
+		Interval& opposite();
+		Interval getOpposite() const;
+		Interval& invert();
+		Interval getInverse() const;
 
-		ErrorCode<Interval> sin() const noexcept;
-		ErrorCode<Interval> cos() const noexcept;
-		ErrorCode<Interval> exp() const noexcept;
-		ErrorCode<Interval> sqrt() const noexcept;
+		ErrorCode<Interval> sin() const;
+		ErrorCode<Interval> cos() const;
+		ErrorCode<Interval> exp() const;
+		ErrorCode<Interval> sqrt() const;
 
-		static Interval sqrt2() noexcept { return {IntervalArithmetic::ISqr2()}; }
-		static Interval sqrt3() noexcept { return {IntervalArithmetic::ISqr3()}; }
-		static Interval pi() noexcept { return {IntervalArithmetic::IPi()}; }
+		static Interval sqrt2() { return {IntervalArithmetic::ISqr2()}; }
+		static Interval sqrt3() { return {IntervalArithmetic::ISqr3()}; }
+		static Interval pi() { return {IntervalArithmetic::IPi()}; }
 
 		std::string to_string() const;
 
 	private:
-		Interval(IntervalArithmetic::interval interval) noexcept;
+		Interval(IntervalArithmetic::interval interval);
 
-		IntervalArithmetic::interval m_value = {0.0, 0.0};
+		IntervalArithmetic::interval m_value;
 	};
 
 	inline std::ostream& operator<<(std::ostream& os, const Interval& value)

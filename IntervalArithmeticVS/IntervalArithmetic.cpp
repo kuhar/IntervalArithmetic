@@ -26,7 +26,7 @@ using namespace IntervalArithmetic;
 // store the original rounding mode
 const int originalRounding = fegetround();
 
-long double IntervalArithmetic::IntWidth(const interval& x) noexcept
+long double IntervalArithmetic::IntWidth(const interval& x) 
 {
 	fesetround(FE_UPWARD);
 	long double w = x.b - x.a;
@@ -34,7 +34,7 @@ long double IntervalArithmetic::IntWidth(const interval& x) noexcept
 	return w;
 }
 
-IntervalArithmetic::interval IntervalArithmetic::IAdd(const interval& x, const interval& y) noexcept
+IntervalArithmetic::interval IntervalArithmetic::IAdd(const interval& x, const interval& y) 
 {
 	interval r;
 	fesetround(FE_DOWNWARD);
@@ -45,7 +45,7 @@ IntervalArithmetic::interval IntervalArithmetic::IAdd(const interval& x, const i
 	return r;
 }
 
-IntervalArithmetic::interval IntervalArithmetic::ISub(const interval& x, const interval& y) noexcept
+IntervalArithmetic::interval IntervalArithmetic::ISub(const interval& x, const interval& y) 
 {
 	interval r;
 	fesetround(FE_DOWNWARD);
@@ -56,7 +56,7 @@ IntervalArithmetic::interval IntervalArithmetic::ISub(const interval& x, const i
 	return r;
 }
 
-IntervalArithmetic::interval IntervalArithmetic::IMul(const interval& x, const interval& y) noexcept
+IntervalArithmetic::interval IntervalArithmetic::IMul(const interval& x, const interval& y) 
 {
 	interval r;
 	long double x1y1, x1y2, x2y1;
@@ -131,7 +131,7 @@ interval IntervalArithmetic::IDiv(const interval& x, const interval& y)
 	return r;
 }
 
-long double IntervalArithmetic::DIntWidth(const interval& x) noexcept
+long double IntervalArithmetic::DIntWidth(const interval& x) 
 {
 	long double w1, w2;
 
@@ -150,7 +150,7 @@ long double IntervalArithmetic::DIntWidth(const interval& x) noexcept
 		return w2;
 }
 
-IntervalArithmetic::interval IntervalArithmetic::Projection(const interval& x) noexcept
+IntervalArithmetic::interval IntervalArithmetic::Projection(const interval& x) 
 {
 	interval r;
 	r = x;
@@ -162,7 +162,7 @@ IntervalArithmetic::interval IntervalArithmetic::Projection(const interval& x) n
 	return r;
 }
 
-IntervalArithmetic::interval IntervalArithmetic::Opposite(const interval& x) noexcept
+IntervalArithmetic::interval IntervalArithmetic::Opposite(const interval& x) 
 {
 	interval r;
 	r.a = -x.a;
@@ -170,7 +170,7 @@ IntervalArithmetic::interval IntervalArithmetic::Opposite(const interval& x) noe
 	return r;
 }
 
-IntervalArithmetic::interval IntervalArithmetic::Inverse(const interval& x) noexcept
+IntervalArithmetic::interval IntervalArithmetic::Inverse(const interval& x) 
 {
 	interval z1, z2;
 
@@ -187,7 +187,7 @@ IntervalArithmetic::interval IntervalArithmetic::Inverse(const interval& x) noex
 		return z2;
 }
 
-IntervalArithmetic::interval IntervalArithmetic::DIAdd(const interval& x, const interval& y) noexcept
+IntervalArithmetic::interval IntervalArithmetic::DIAdd(const interval& x, const interval& y) 
 {
 	interval z1, z2;
 	if ((x.a <= x.b) && (y.a <= y.b))
@@ -210,7 +210,7 @@ IntervalArithmetic::interval IntervalArithmetic::DIAdd(const interval& x, const 
 	}
 }
 
-IntervalArithmetic::interval IntervalArithmetic::DISub(const interval& x, const interval& y) noexcept
+IntervalArithmetic::interval IntervalArithmetic::DISub(const interval& x, const interval& y) 
 {
 	interval z1, z2;
 	if ((x.a <= x.b) && (y.a <= y.b))
@@ -233,7 +233,7 @@ IntervalArithmetic::interval IntervalArithmetic::DISub(const interval& x, const 
 	}
 }
 
-IntervalArithmetic::interval IntervalArithmetic::DIMul(const interval& x, const interval& y) noexcept
+IntervalArithmetic::interval IntervalArithmetic::DIMul(const interval& x, const interval& y) 
 {
 	interval z1, z2, r;
 	long double z;
@@ -506,7 +506,7 @@ interval IntervalArithmetic::DIDiv(const interval& x, const interval& y)
 	return r;
 }
 
-IntervalArithmetic::interval IntervalArithmetic::IntRead(const std::string& sa) noexcept
+IntervalArithmetic::interval IntervalArithmetic::IntRead(const std::string& sa) 
 {
 	interval r;
 	mpfr_t rop;
@@ -523,14 +523,14 @@ IntervalArithmetic::interval IntervalArithmetic::IntRead(const std::string& sa) 
 	return r;
 }
 
-long double IntervalArithmetic::LeftRead(const std::string& sa) noexcept
+long double IntervalArithmetic::LeftRead(const std::string& sa) 
 {
 	interval int_number;
 	int_number = IntRead(sa);
 	return int_number.a;
 }
 
-long double IntervalArithmetic::RightRead(const std::string& sa) noexcept
+long double IntervalArithmetic::RightRead(const std::string& sa) 
 {
 	interval int_number;
 	int_number = IntRead(sa);
@@ -736,7 +736,7 @@ IntervalArithmetic::interval IntervalArithmetic::IExp(const interval& x, char& s
 	return r;
 }
 
-IntervalArithmetic::interval IntervalArithmetic::ISqr(const interval& x, char& st) noexcept
+IntervalArithmetic::interval IntervalArithmetic::ISqr(const interval& x, char& st) 
 {
 	long double minx, maxx;
 	interval r;

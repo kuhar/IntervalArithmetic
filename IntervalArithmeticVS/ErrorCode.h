@@ -33,8 +33,9 @@ namespace ean
 		}
 
 		ErrorCode(const ErrorCode&) = default;
-		ErrorCode(ErrorCode&&) noexcept = default;
-
+#if !defined(_MSC_VER) || (_MSC_VER >= 1900) // >= VC14
+		ErrorCode(ErrorCode&&) = default;
+#endif
 		const T& get() const
 		{
 			if (isError())
@@ -53,11 +54,11 @@ namespace ean
 			return m_result;
 		}
 
-		void setError(char errorCode) noexcept { m_erorrCode = errorCode; }
-		char getError() const noexcept { return m_erorrCode; }
-		bool isError() const noexcept { return m_erorrCode != 0; }
+		void setError(char errorCode)  { m_erorrCode = errorCode; }
+		char getError() const { return m_erorrCode; }
+		bool isError() const { return m_erorrCode != 0; }
 
-		operator bool() const noexcept { return !isError(); }
+		operator bool() const { return !isError(); }
 
 	private:
 		ErrorCode() {}

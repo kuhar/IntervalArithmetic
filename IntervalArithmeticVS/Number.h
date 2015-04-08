@@ -25,49 +25,49 @@ namespace ean
 	{
 		static_assert(std::is_floating_point<T>::value, "T must be a floating point type");
 	public:
-		Number() noexcept = default;
-		Number(const std::string& value) noexcept
+		Number() = default;
+		Number(const std::string& value) 
 			: m_value(std::stold(value))
 		{}
 
-		explicit Number(T value) noexcept
+		explicit Number(T value) 
 			: m_value(value)
 		{}
 
-		T getWidth() const noexcept { return T(0); }
+		T getWidth() const  { return T(0); }
 
-		Number& operator+=(const Number& rhs) noexcept
+		Number& operator+=(const Number& rhs) 
 		{
 			m_value += rhs.m_value;
 			return *this;
 		}
 
-		Number operator+(const Number& rhs) const noexcept
+		Number operator+(const Number& rhs) const 
 		{
 			Number temp = *this;
 			temp += rhs;
 			return temp;
 		}
 
-		Number& operator-=(const Number& rhs) noexcept
+		Number& operator-=(const Number& rhs) 
 		{
 			m_value -= rhs.m_value;
 			return *this;
 		}
-		Number operator-(const Number& rhs) const noexcept
+		Number operator-(const Number& rhs) const 
 		{
 			Number temp = *this;
 			temp -= rhs;
 			return temp;
 		}
 
-		Number& operator*=(const Number& rhs) noexcept
+		Number& operator*=(const Number& rhs) 
 		{
 			m_value *= rhs.m_value;
 			return *this;
 		}
 
-		Number operator*(const Number& rhs) const noexcept
+		Number operator*(const Number& rhs) const 
 		{
 			Number temp = *this;
 			temp *= rhs;
@@ -97,53 +97,53 @@ namespace ean
 			return std::fabs(m_value - rhs.m_value) < T(LDBL_EPSILON);
 		}
 
-		Number& opposite() noexcept
+		Number& opposite() 
 		{
 			m_value = -m_value;
 			return *this;
 		}
 
-		Number getOpposite() const noexcept
+		Number getOpposite() const 
 		{
 			return Number{-m_value};
 		}
 
-		Number& invert() noexcept
+		Number& invert() 
 		{
 			m_value = 1 / m_value;
 			return *this;
 		}
 
-		Number getInverse() const noexcept
+		Number getInverse() const 
 		{
 			Number temp = *this;
 			temp.invert();
 			return temp;
 		}
 
-		ErrorCode<Number> sin() const noexcept
+		ErrorCode<Number> sin() const 
 		{
 			return {Number{std::sin(m_value)}};
 		}
 		
-		ErrorCode<Number> cos() const noexcept
+		ErrorCode<Number> cos() const 
 		{
 			return {Number{std::cos(m_value)}};
 		}
 		
-		ErrorCode<Number> exp() const noexcept
+		ErrorCode<Number> exp() const 
 		{
 			return {Number{std::exp(m_value)}};
 		}
 		
-		ErrorCode<Number> sqrt() const noexcept
+		ErrorCode<Number> sqrt() const 
 		{
 			return {Number{std::sqrt(m_value)}};
 		}
 
-		static Number sqrt2() noexcept { return Number{T(M_SQRT2)}; }
-		static Number sqrt3() noexcept { return Number{T(std::sqrt(3.0l))}; }
-		static Number pi() noexcept { return Number{T(M_PI)}; }
+		static Number sqrt2() { return Number{T(M_SQRT2)}; }
+		static Number sqrt3() { return Number{T(std::sqrt(3.0l))}; }
+		static Number pi() { return Number{T(M_PI)}; }
 
 		std::string to_string() const 
 		{
