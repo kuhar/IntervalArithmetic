@@ -803,7 +803,7 @@ void IntervalArithmetic::IEndsToStrings(const interval& i, string& left, string&
 	ostringstream oss;
 	oss << setprecision(15) << i.a;
 	left = oss.str();
-	oss = ostringstream();
-	oss << setprecision(15) << i.b;
-	right = oss.str();
+	ostringstream oss2;
+	oss2 << setprecision(15) << i.b;
+	right = oss2.str();
 }
