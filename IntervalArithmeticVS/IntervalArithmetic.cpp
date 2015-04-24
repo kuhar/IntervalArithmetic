@@ -820,9 +820,9 @@ void IntervalArithmetic::IEndsToStrings(const interval& i, string& left, string&
 	};
 	complementExponent(left);
 
-	oss = ostringstream();
-	oss << std::scientific << i.b;
-	right = oss.str();
+	ostringstream oss2;
+	oss2 << std::scientific << i.b;
+	right = oss2.str();
 
 	complementExponent(right);
 }
