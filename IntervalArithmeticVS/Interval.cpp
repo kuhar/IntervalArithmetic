@@ -140,7 +140,7 @@ namespace ean
 		}
 	}
 
-	ErrorCode<Interval> Interval::sqrt() const 
+	ErrorCode<Interval> Interval::sqr() const 
 	{
 		try
 		{

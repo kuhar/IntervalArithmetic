@@ -136,9 +136,9 @@ namespace ean
 			return {Number{std::exp(m_value)}};
 		}
 		
-		ErrorCode<Number> sqrt() const 
+		ErrorCode<Number> sqr() const 
 		{
-			return {Number{std::sqrt(m_value)}};
+			return {Number{m_value * m_value}};
 		}
 
 		static Number sqrt2() { return Number{T(M_SQRT2)}; }

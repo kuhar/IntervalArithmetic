@@ -55,7 +55,7 @@ namespace ean
 		ErrorCode<Interval> sin() const;
 		ErrorCode<Interval> cos() const;
 		ErrorCode<Interval> exp() const;
-		ErrorCode<Interval> sqrt() const;
+		ErrorCode<Interval> sqr() const;
 
 		static Interval sqrt2() { return {IntervalArithmetic::ISqr2()}; }
 		static Interval sqrt3() { return {IntervalArithmetic::ISqr3()}; }
