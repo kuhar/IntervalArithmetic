@@ -801,9 +801,28 @@ interval IntervalArithmetic::IPi()
 void IntervalArithmetic::IEndsToStrings(const interval& i, string& left, string& right)
 {
 	ostringstream oss;
-	oss << setprecision(15) << i.a;
+	oss << std::scientific << i.a;
 	left = oss.str();
-	oss = ostringstream();
-	oss << setprecision(15) << i.b;
-	right = oss.str();
+
+	auto complementExponent = [](string& x)
+	{
+		auto pos = x.find('e');
+		if (pos == string::npos) return;
+		x[pos] = 'E';
+		if (x[pos + 1] == '+' || x[pos + 1] == '-')
+		{
+			auto width = x.size() - pos - 2;
+			if (width < 4)
+			{
+				x.insert(pos + 2, string(4 - width, '0'));
+			}
+		}
+	};
+	complementExponent(left);
+
+	ostringstream oss2;
+	oss2 << std::scientific << i.b;
+	right = oss2.str();
+
+	complementExponent(right);
 }
