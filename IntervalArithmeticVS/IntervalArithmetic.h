@@ -3,10 +3,9 @@
  *
  *  Created on: 20-11-2012
  *  Author: Tomasz Hoffmann and Andrzej Marciniak
- *  Some utter crap fixed by Jakub Kuderski
+ *  Overall overhaul by Jakub Kuderski
  *
- *  Before you start use module, please install libraries:
- *  	- GNU MPFR ( http://www.mpfr.org/ )
+ *  Before you start using the module, please install libraries: mpfr
  */
 
 #ifndef INTERVALARITHMETIC_H_

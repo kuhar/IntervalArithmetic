@@ -3,7 +3,7 @@
 *
 *  Created on: 20-11-2012
 *  Author: Tomasz Hoffmann and Andrzej Marciniak
-*  Some utter crap fixed by Jakub Kuderski
+*  Overall overhaul by Jakub Kuderski
 */
 
 #include "IntervalArithmetic.h"
@@ -105,12 +105,11 @@ interval IntervalArithmetic::IDiv(const interval& x, const interval& y)
 		x1y2 = x.a / y.b;
 		x2y1 = x.b / y.a;
 		r.a = x.b / y.b;
-		t = r.a;
-		if (x2y1 < t)
+		if (x2y1 < r.a)
 			r.a = x2y1;
-		if (x1y2 < t)
+		if (x1y2 < r.a)
 			r.a = x1y2;
-		if (x1y1 < t)
+		if (x1y1 < r.a)
 			r.a = x1y1;
 
 		fesetround(FE_UPWARD);
@@ -119,12 +118,11 @@ interval IntervalArithmetic::IDiv(const interval& x, const interval& y)
 		x2y1 = x.b / y.a;
 
 		r.b = x.b / y.b;
-		t = r.b;
-		if (x2y1 > t)
+		if (x2y1 > r.b)
 			r.b = x2y1;
-		if (x1y2 > t)
+		if (x1y2 > r.b)
 			r.b = x1y2;
-		if (x1y1 > t)
+		if (x1y1 > r.b)
 			r.b = x1y1;
 	}
 	fesetround(FE_TONEAREST);
