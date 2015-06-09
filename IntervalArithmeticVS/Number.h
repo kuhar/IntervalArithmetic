@@ -148,8 +148,25 @@ namespace ean
 		std::string to_string() const 
 		{
 			std::ostringstream oss;
-			oss << std::setprecision(15) << m_value;
-			return oss.str();
+			oss << std::scientific << m_value;
+			std::string res = oss.str();
+
+			auto complementExponent = [](string& x)
+			{
+				auto pos = x.find('e');
+				if (pos == string::npos) return;
+				if (x[pos + 1] == '+' || x[pos + 1] == '-')
+				{
+					auto width = x.size() - pos - 2;
+					if (width < 4)
+					{
+						x.insert(pos + 2, string(4 - width, '0'));
+					}
+				}
+			};
+			complementExponent(res);
+
+			return res;
 		}
 
 	private:
