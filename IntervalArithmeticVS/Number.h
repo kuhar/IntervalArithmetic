@@ -153,8 +153,9 @@ namespace ean
 
 			auto complementExponent = [](string& x)
 			{
-				auto pos = x.find('e');
+				const size_t pos = x.find('e');
 				if (pos == string::npos) return;
+				x[pos] = 'E';
 				if (x[pos + 1] == '+' || x[pos + 1] == '-')
 				{
 					auto width = x.size() - pos - 2;

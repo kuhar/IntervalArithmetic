@@ -800,29 +800,52 @@ interval IntervalArithmetic::IPi()
 
 void IntervalArithmetic::IEndsToStrings(const interval& i, string& left, string& right)
 {
-	ostringstream oss;
-	oss << std::scientific << std::setprecision(16) << i.a;
-	left = oss.str();
+	const unsigned precision = std::numeric_limits<long double>::digits10 + 1;
+
+	mpfr_t rop;
+	mpfr_exp_t exponent;
+	mpfr_init2(rop, 80);
+	char buffer[80 + 3] = {};
+	mpfr_set_ld(rop, i.a, MPFR_RNDD);
+
+	mpfr_get_str(buffer, &exponent, 10, precision, rop, MPFR_RNDD);
+
+	std::stringstream ss;
+	ss << std::scientific << std::setprecision(precision);
+	bool minus = (buffer[0] == '-');
+	size_t splitpoint = minus ? 1 : 0;
+	ss << (minus ? "-" : "") << buffer[splitpoint] << "."
+		<< &buffer[splitpoint + 1] << "E" << exponent - 1;
+	left = ss.str();
+	ss.str("");
+
+	for (auto& x : buffer) x = '\0';
+
+	mpfr_set_ld(rop, i.b, MPFR_RNDU);
+	mpfr_get_str(buffer, &exponent, 10, precision, rop, MPFR_RNDU);
+	
+	splitpoint = (buffer[0] == '-') ? 1 : 0;
+	ss << (buffer[0] == '-' ? "-" : "") << buffer[splitpoint] << "."
+		<< &buffer[splitpoint + 1] << "E" << exponent - 1;
+	right = ss.str();
 
 	auto complementExponent = [](string& x)
 	{
-		auto pos = x.find('e');
+		size_t pos = x.find('E');
 		if (pos == string::npos) return;
-		x[pos] = 'E';
-		if (x[pos + 1] == '+' || x[pos + 1] == '-')
+		if (pos + 1 >= x.size()) return;
+
+		if (x[pos + 1] == '-')
 		{
-			auto width = x.size() - pos - 2;
-			if (width < 4)
-			{
-				x.insert(pos + 2, string(4 - width, '0'));
-			}
+			++pos;
+		}
+		auto width = x.size() - pos - 1;
+		if (width < 4)
+		{
+			x.insert(pos + 1, string(4 - width, '0'));
 		}
 	};
+
 	complementExponent(left);
-
-	ostringstream oss2;
-	oss2 << std::scientific << std::setprecision(16) << i.b;
-	right = oss2.str();
-
 	complementExponent(right);
 }
