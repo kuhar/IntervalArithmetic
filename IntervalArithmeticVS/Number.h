@@ -148,7 +148,7 @@ namespace ean
 		std::string to_string() const 
 		{
 			std::ostringstream oss;
-			oss << std::scientific << m_value;
+			oss << std::scientific << std::setprecision(16) << m_value;
 			std::string res = oss.str();
 
 			auto complementExponent = [](string& x)

@@ -801,7 +801,7 @@ interval IntervalArithmetic::IPi()
 void IntervalArithmetic::IEndsToStrings(const interval& i, string& left, string& right)
 {
 	ostringstream oss;
-	oss << std::scientific << i.a;
+	oss << std::scientific << std::setprecision(16) << i.a;
 	left = oss.str();
 
 	auto complementExponent = [](string& x)
@@ -821,7 +821,7 @@ void IntervalArithmetic::IEndsToStrings(const interval& i, string& left, string&
 	complementExponent(left);
 
 	ostringstream oss2;
-	oss2 << std::scientific << i.b;
+	oss2 << std::scientific << std::setprecision(16) << i.b;
 	right = oss2.str();
 
 	complementExponent(right);
