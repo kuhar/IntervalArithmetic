@@ -59,32 +59,27 @@ IntervalArithmetic::interval IntervalArithmetic::ISub(const interval& x, const i
 IntervalArithmetic::interval IntervalArithmetic::IMul(const interval& x, const interval& y) 
 {
 	interval r;
-	long double x1y1, x1y2, x2y1;
+	long double results[8];
 
 	fesetround(FE_DOWNWARD);
-	x1y1 = x.a * y.a;
-	x1y2 = x.a * y.b;
-	x2y1 = x.b * y.a;
-	r.a = x.b * y.b;
-	if (x2y1 < r.a)
-		r.a = x2y1;
-	if (x1y2 < r.a)
-		r.a = x1y2;
-	if (x1y1 < r.a)
-		r.a = x1y1;
-
+	results[0] = x.a * y.a;
+	results[1] = x.a * y.b;
+	results[2] = x.b * y.a;
+	results[3] = x.b * y.b;
 	fesetround(FE_UPWARD);
-	x1y1 = x.a * y.a;
-	x1y2 = x.a * y.b;
-	x2y1 = x.b * y.a;
+	results[4] = x.a * y.a;
+	results[5] = x.a * y.b;
+	results[6] = x.b * y.a;
+	results[7] = x.b * y.b;
 
-	r.b = x.b * y.b;
-	if (x2y1 > r.b)
-		r.b = x2y1;
-	if (x1y2 > r.b)
-		r.b = x1y2;
-	if (x1y1 > r.b)
-		r.b = x1y1;
+	r.a = results[0];
+	r.b = results[0];
+	for (int i = 1; i < 8; i++) {
+		if (r.a > results[i])
+			r.a = results[i];
+		if (r.b < results[i])
+			r.b = results[i];
+	}
 	fesetround(FE_TONEAREST);
 	return r;
 }
