@@ -163,6 +163,11 @@ namespace ean
 					{
 						x.insert(pos + 2, string(4 - width, '0'));
 					}
+
+					if (x[pos + 1] == '+')
+					{
+						x.erase(pos + 1, 1);
+					}
 				}
 			};
 			complementExponent(res);

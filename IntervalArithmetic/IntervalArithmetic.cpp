@@ -793,7 +793,7 @@ interval IntervalArithmetic::IPi()
 
 void IntervalArithmetic::IEndsToStrings(const interval& i, string& left, string& right)
 {
-	const unsigned precision = std::numeric_limits<long double>::digits10 + 1;
+	const unsigned precision = std::numeric_limits<long double>::digits10;
 
 	mpfr_t rop;
 	mpfr_exp_t exponent;

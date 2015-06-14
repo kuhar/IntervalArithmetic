@@ -20,10 +20,9 @@ namespace ean
 		static const char DivisionByZeroCode = 3;
 
 		Interval() = default;
-		Interval(long double left, long double right) 
-		{
-			m_value = {left, right};
-		}
+		Interval(long double left, long double right)
+			: m_value({left, right})
+		{}
 
 		Interval(const std::string& value);
 
@@ -66,7 +65,7 @@ namespace ean
 	private:
 		Interval(IntervalArithmetic::interval interval);
 
-		IntervalArithmetic::interval m_value;
+		IntervalArithmetic::interval m_value = {0.0, 0.0};
 	};
 
 	inline std::ostream& operator<<(std::ostream& os, const Interval& value)
